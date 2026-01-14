@@ -42,7 +42,29 @@ $filteredArticles = $selectedAuthor ? filterByAuthor($articles, $selectedAuthor)
 
 // Tri par date décroissante
 sortArticlesByDate($filteredArticles);
+
+
+// --- Étape 8: Fonction pour lister les catégories uniques ---
+
+function getCategoriesList($articles) {
+    $categories = []; // tablo pou kategori inik
+    foreach ($articles as $article) {
+        // Si kategori a pa deja nan tablo a, ajoute li
+        if (!in_array($article['categorie'], $categories)) {
+            $categories[] = $article['categorie'];
+        }
+    }
+    return $categories;
+}
+
+// --- Test de la fonction ---
+$categoriesUnik = getCategoriesList($articles);
+echo "<pre>";
+print_r($categoriesUnik);
+echo "</pre>";
 ?>
+
+
 
 <!DOCTYPE html>
 <html lang="fr">
