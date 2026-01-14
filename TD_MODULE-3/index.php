@@ -1,5 +1,5 @@
 <?php
-// --- Tableau d'articles (TD Module 3 + ajout catégories pour Étape 7) ---
+// --- Tableau d'articles (TD Module 3 + ajout catégories) ---
 $articles = [
     ['id'=>1,'titre'=>'Mon premier article','contenu'=>'Lorem ipsum dolor sit amet...','auteur'=>'Alice','date'=>'2025-01-10','categorie'=>'Tutoriels'],
     ['id'=>2,'titre'=>'Deuxième article','contenu'=>'Consectetur adipiscing elit...','auteur'=>'Bob','date'=>'2025-01-11','categorie'=>'Ressources'],
@@ -8,7 +8,7 @@ $articles = [
     ['id'=>5,'titre'=>'Cinquième article','contenu'=>'Ut enim ad minim veniam...','auteur'=>'Bob','date'=>'2025-01-08','categorie'=>'Ressources'],
 ];
 
-// --- Fonction displayArticle() du Coding Live ---
+// --- Fonctions ---
 function displayArticle($article) {
     return "
     <div class='card mb-3'>
@@ -21,35 +21,17 @@ function displayArticle($article) {
     </div>";
 }
 
-// --- TD Module 3 ---
-// Filtrer par auteur
 function filterByAuthor($articles, $author) {
     return array_filter($articles, fn($article) => $article['auteur'] === $author);
 }
 
-// Trier par date décroissante
 function sortArticlesByDate(&$articles) {
-    usort($articles, function($a, $b) {
-        return strtotime($b['date']) - strtotime($a['date']); // Décroissant
-    });
+    usort($articles, fn($a,$b) => strtotime($b['date']) - strtotime($a['date']));
 }
 
-// --- Gestion filtre TD simple ---
-$selectedAuthor = $_GET['author'] ?? null;
-
-// Filtrage par auteur si présent
-$filteredArticles = $selectedAuthor ? filterByAuthor($articles, $selectedAuthor) : $articles;
-
-// Tri par date décroissante
-sortArticlesByDate($filteredArticles);
-
-
-// --- Étape 8: Fonction pour lister les catégories uniques ---
-
 function getCategoriesList($articles) {
-    $categories = []; // tablo pou kategori inik
+    $categories = [];
     foreach ($articles as $article) {
-        // Si kategori a pa deja nan tablo a, ajoute li
         if (!in_array($article['categorie'], $categories)) {
             $categories[] = $article['categorie'];
         }
@@ -57,12 +39,25 @@ function getCategoriesList($articles) {
     return $categories;
 }
 
-// --- Test de la fonction ---
-$categoriesUnik = getCategoriesList($articles);
-echo "<pre>";
-print_r($categoriesUnik);
-echo "</pre>";
+// --- Gestion filtre GET ---
+$selectedAuthor = $_GET['author'] ?? null;
+$selectedCategory = $_GET['category'] ?? null;
+
+// Filtrage initial
+$filteredArticles = $articles;
+
+if ($selectedAuthor) {
+    $filteredArticles = filterByAuthor($filteredArticles, $selectedAuthor);
+}
+
+if ($selectedCategory) {
+    $filteredArticles = array_filter($filteredArticles, fn($article) => $article['categorie'] === $selectedCategory);
+}
+
+// Trier par date décroissante
+sortArticlesByDate($filteredArticles);
 ?>
+
 
 
 
@@ -71,13 +66,13 @@ echo "</pre>";
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog d'Articles - TD Module 3</title>
+    <title>Blog d'Articles </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light p-5">
 
 <div class="container bg-white p-4 shadow-sm rounded">
-    <h1 class="mb-4">Blog d'Articles - TD Module 3</h1>
+    <h1 class="mb-4">Blog d'Articles</h1>
 
     <!-- Boutons filtrage par auteur -->
     <div class="mb-3">
@@ -92,9 +87,21 @@ echo "</pre>";
 
     <hr>
 
+    <!-- Boutons filtrage par catégorie -->
+<div class="mb-3">
+    <strong>Catégories :</strong>
+    <a href="index.php" class="btn btn-secondary btn-sm me-2">Tous</a>
+    <?php foreach(getCategoriesList($articles) as $category): ?>
+        <a href="index.php?category=<?php echo urlencode($category); ?>" 
+           class="btn btn-outline-success btn-sm me-2 <?php echo ($selectedCategory === $category ? 'active' : ''); ?>">
+            <?php echo htmlspecialchars($category); ?>
+        </a>
+    <?php endforeach; ?>
+</div>
+
     <!-- Compteur -->
     <p class="text-muted">
-        <?php echo count($filteredArticles); ?> article(s)
+        <?php echo count($filteredArticles); ?> article
         <?php if($selectedAuthor) echo " de l'auteur : <strong>".htmlspecialchars($selectedAuthor)."</strong>"; ?>
     </p>
 
