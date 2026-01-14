@@ -1,9 +1,107 @@
 <!DOCTYPE html>
-<html>
-    <head>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ma Boutique</title>
 
-    </head>
-    <body>
-        <h1>Hello, World!</h1>  
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-dark mb-4" style="background-color:#0A47A3;">
+    <div class="container">
+        <span class="navbar-brand mb-0 h1">Ma Boutique</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <h1 class="text-center mb-4">Catalogue de Produits</h1>
+
+    <!-- BOUTONS FILTRE -->
+    <div class="d-flex justify-content-center gap-2 mb-5">
+        <button class="btn btn-outline-primary active filter-btn" data-filter="tous">
+            Tous les produits
+        </button>
+        <button class="btn btn-outline-primary filter-btn" data-filter="Electronique">
+            Electronique
+        </button>
+        <button class="btn btn-outline-primary filter-btn" data-filter="Vetements">
+            Vetements
+        </button>
+        <button class="btn btn-outline-primary filter-btn" data-filter="Livres">
+            Livres
+        </button>
+    </div>
+
+    <!-- PRODUITS -->
+    <div class="row g-4">
+
+        <div class="col-md-4 product-card" data-category="Electronique">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h5>Souris sans fil</h5>
+                    <p>Electronique</p>
+                    <p>29.99€</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 product-card" data-category="Electronique">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h5>Clavier Mecanique</h5>
+                    <p>Electronique</p>
+                    <p>89.99€</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 product-card" data-category="Vetements">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h5>T-shirt Coton</h5>
+                    <p>Vetements</p>
+                    <p>19.99€</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 product-card" data-category="Vetements">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h5>Jean Slim</h5>
+                    <p>Vetements</p>
+                    <p>49.99€</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 product-card" data-category="Livres">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h5>Livre PHP 8</h5>
+                    <p>Livres</p>
+                    <p>39.99€</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 product-card" data-category="Livres">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <h5>Livre Algorithmie</h5>
+                    <p>Livres</p>
+                    <p>24.99€</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- JS -->
+<script src="script.js"></script>
+</body>
 </html>

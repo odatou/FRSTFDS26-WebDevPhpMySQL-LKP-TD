@@ -1,0 +1,44 @@
+
+body {
+    background-color: #F7F7F7; 
+    font-family: Arial, sans-serif; 
+}
+
+
+.card {
+    border: none;
+    border-radius: 10px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+}
+
+
+.card:hover {
+    transform: translateY(-10px); 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
+}
+
+
+.btn-custom {
+    background-color: #1E9E67; 
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease; 
+}
+
+.btn-custom:hover {
+    background-color: #0A47A3; 
+    color: white;
+}
+
+.category-text {
+    color: #6c757d; 
+    font-size: 0.9rem;
+}
+
+.price-text {
+    font-weight: bold; 
+    color: #0A47A3; 
+    font-size: 1.2rem;
+}
+
