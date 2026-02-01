@@ -92,7 +92,7 @@ try {
         echo '<div class="alert alert-danger">
                 Cet email est déjà associé à un compte. Veuillez en utiliser un autre.
               </div>';
-        echo '<a href="signup_form.html">⬅ Retour au formulaire</a>';
+        echo '<a href="signup_form.html">Retour au formulaire</a>';
         exit;
     }
 
